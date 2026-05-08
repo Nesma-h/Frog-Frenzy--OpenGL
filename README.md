@@ -1,51 +1,51 @@
 # 🐸 FROG FRENZY 3D
 ## OpenGL C++ Game Project
 
---
+---
 
-## 📋 المتطلبات المحققة
+## 📋 Implemented Requirements
 
-| المتطلب | التفاصيل |
-|---------|---------|
-| ✅ 3D | بيئة ثلاثية الأبعاد كاملة (طريق، ماء، أشجار، سيارات) |
-| ✅ Animation | قفز الضفدعة (parabolic arc)، أرجل متحركة، دواليب السيارات، ماء متموج، شمس دوارة |
-| ✅ Keyboard & Mouse | WASD + Arrow Keys لتحريك الضفدعة، Mouse Drag للكاميرا الحرة |
+| Requirement | Details |
+|-------------|---------|
+| ✅ 3D | Full 3D environment (road, water, trees, cars) |
+| ✅ Animation | Frog jumping (parabolic arc), moving legs, car wheels, rippling water, rotating sun |
+| ✅ Keyboard & Mouse | WASD + Arrow Keys to move the frog, Mouse Drag for free camera |
 | ✅ Camera | 3 modes: Follow / Top-Down / Free Camera |
-| ✅ Lighting | شمس ديناميكية (LIGHT0) + Fill light (LIGHT1)، وضع ليل/نهار |
-| ✅ Texture | Procedural textures: طريق، عشب، ضفدعة، سيارة، ماء، سجلة، سماء |
-| ✅ Collision | AABB 3D/2D collision لكل العوائق + Goal detection |
+| ✅ Lighting | Dynamic sun (LIGHT0) + Fill light (LIGHT1), day/night mode |
+| ✅ Texture | Procedural textures: road, grass, frog, car, water, log, sky |
+| ✅ Collision | AABB 3D/2D collision for all obstacles + Goal detection |
 
 ---
 
-## 🗂️ هيكل الملفات
+## 🗂️ File Structure
 
 ```
 FrogFrenzy/
-├── main.cpp         ← الملف الرئيسي (اللعبة + GLUT callbacks)
-├── Camera.h         ← نظام الكاميرا (Follow / Top / Free)
-├── Lighting.h       ← الإضاءة الديناميكية (شمس + ليل)
+├── main.cpp         ← Main file (game + GLUT callbacks)
+├── Camera.h         ← Camera system (Follow / Top / Free)
+├── Lighting.h       ← Dynamic lighting (sun + night)
 ├── Texture.h        ← Procedural Texture Manager
 ├── Collision.h      ← AABB Collision Detection
-├── Frog.h           ← كلاس الضفدعة + animation
-├── Car.h            ← السيارات والسجلات + animation
-├── stb_image.h      ← (مش بنستخدمه لأن textures procedural)
+├── Frog.h           ← Frog class + animation
+├── Car.h            ← Cars and logs + animation
+├── stb_image.h      ← (unused since textures are procedural)
 ├── Makefile         ← Linux/Mac
 └── README.md
 ```
 
 ---
 
-## 🖥️ كيفية التشغيل
+## 🖥️ How to Run
 
 ### Linux (Ubuntu/Debian)
 ```bash
-# 1. تثبيت المكتبات
+# 1. Install libraries
 sudo apt-get install freeglut3-dev
 
-# 2. بناء اللعبة
+# 2. Build the game
 make
 
-# 3. تشغيل
+# 3. Run
 ./FrogFrenzy
 ```
 
@@ -58,106 +58,106 @@ make
 
 ### macOS
 ```bash
-# freeglut موجود مع Xcode Command Line Tools
+# freeglut comes with Xcode Command Line Tools
 make
 ./FrogFrenzy
 ```
 
 ### Windows (MinGW / Code::Blocks)
 ```bash
-# تحميل freeglut من: https://www.transmissionzero.co.uk/software/freeglut-devel/
-# ثم compile:
+# Download freeglut from: https://www.transmissionzero.co.uk/software/freeglut-devel/
+# Then compile:
 g++ main.cpp -o FrogFrenzy.exe -lopengl32 -lglu32 -lfreeglut -std=c++11
 ```
 
 ### Windows (Visual Studio)
-1. حمّل **freeglut** أو استخدم **NuGet: freeglut**
-2. أضف كل الملفات للمشروع
-3. في Project Properties:
-   - Additional Include Dirs: مجلد freeglut include
-   - Additional Lib Dirs: مجلد freeglut lib
+1. Download **freeglut** or use **NuGet: freeglut**
+2. Add all files to the project
+3. In Project Properties:
+   - Additional Include Dirs: freeglut include folder
+   - Additional Lib Dirs: freeglut lib folder
    - Additional Dependencies: `opengl32.lib; glu32.lib; freeglut.lib`
 4. Build & Run
 
 ---
 
-## 🎮 تحكمات اللعبة
+## 🎮 Controls
 
-| مفتاح | الوظيفة |
-|-------|---------|
-| ↑ ↓ ← → | تحريك الضفدعة |
-| W A S D | تحريك الضفدعة (بديل) |
-| **C** | تبديل الكاميرا (Follow → Top → Free) |
-| **N** | ليل / نهار |
-| **R** | إعادة اللعب |
-| **ESC** | خروج |
-| Mouse Drag | تدوير الكاميرا الحرة |
-| I J K L | تحريك الكاميرا الحرة |
-
----
-
-## 🎯 هدف اللعبة
-
-1. حرّك الضفدعة من **الأسفل للأعلى** (من Z=+8 إلى Z=-15)
-2. **تجنب السيارات** في طريق (5 lanes) - تصادم = خسارة حياة
-3. **اركب السجلات** عبر النهر (3 lanes) - لو وقعت في الماء = غرق
-4. **اوصل لـ 5 أماكن** في الجانب الآخر ← تنتهي المرحلة
-5. عند إكمال مرحلة → **Level Up** والسرعة تزيد
-6. لديك **3 أرواح** - لو خلصت = Game Over
+| Key | Action |
+|-----|--------|
+| ↑ ↓ ← → | Move the frog |
+| W A S D | Move the frog (alternative) |
+| **C** | Switch camera (Follow → Top → Free) |
+| **N** | Toggle night / day |
+| **R** | Restart game |
+| **ESC** | Quit |
+| Mouse Drag | Rotate free camera |
+| I J K L | Move free camera |
 
 ---
 
-## 🔧 التفاصيل التقنية
+## 🎯 Game Objective
+
+1. Move the frog from **bottom to top** (from Z=+8 to Z=-15)
+2. **Avoid cars** on the road (5 lanes) — collision = lose a life
+3. **Ride logs** across the river (3 lanes) — falling in water = drowning
+4. **Reach 5 goal spots** on the other side → stage complete
+5. On stage completion → **Level Up** and speed increases
+6. You have **3 lives** — lose them all = Game Over
+
+---
+
+## 🔧 Technical Details
 
 ### 3D Scene
 - OpenGL Fixed Pipeline (GL_LIGHTING, GL_TEXTURE_2D)
 - Z-buffer depth testing
-- Alpha blending للماء الشفاف
+- Alpha blending for transparent water
 
 ### Animation System
-- **Frog Jump**: منحنى Parabolic `y = height * 4t(1-t)` 
-- **Leg Animation**: `sinf(legAnim)` للأرجل
-- **Car Wheels**: دوران مستمر بناءً على السرعة
-- **Water**: موجات `sinf(x*0.5 + time)` + تمرير UV offset
-- **Sun**: دوران ديناميكي يغير لون الضوء
+- **Frog Jump**: Parabolic curve `y = height * 4t(1-t)`
+- **Leg Animation**: `sinf(legAnim)` for legs
+- **Car Wheels**: Continuous rotation based on speed
+- **Water**: Waves `sinf(x*0.5 + time)` + UV offset scrolling
+- **Sun**: Dynamic rotation that changes light color
 - **Death**: Squish scale animation
 
 ### Collision Detection
-- **AABB** (Axis-Aligned Bounding Box) لكل كائن
-- Road obstacles → موت فوري
-- Water obstacles (logs) → يركب عليها + يتحرك معها
-- Water lanes بدون سجلة → غرق
-- Goal zones → فوز
+- **AABB** (Axis-Aligned Bounding Box) for every object
+- Road obstacles → instant death
+- Water obstacles (logs) → frog rides and moves with them
+- Water lanes without a log → drowning
+- Goal zones → win condition
 
 ### Texture System
-- **Procedural Generation** - لا توجد ملفات خارجية مطلوبة
-- كل texture تُولَّد بالكود (noise, patterns, gradients)
-- `glGenerateMipmap` للجودة من مسافات بعيدة
+- **Procedural Generation** — no external files required
+- Every texture is generated in code (noise, patterns, gradients)
+- `glGenerateMipmap` for quality at far distances
 
 ### Lighting
-- `GL_LIGHT0`: الشمس الديناميكية (تتحرك، تغير لون)
-- `GL_LIGHT1`: Fill light من الأسفل
-- `GL_COLOR_MATERIAL`: ألوان الكائنات تتأثر بالضوء
-- Night mode: يغير ambient + diffuse لألوان ليلية
+- `GL_LIGHT0`: Dynamic sun (moves, changes color)
+- `GL_LIGHT1`: Fill light from below
+- `GL_COLOR_MATERIAL`: Object colors are affected by lighting
+- Night mode: changes ambient + diffuse to nighttime colors
 
 ### Camera Modes
-1. **Follow**: كاميرا تتبع الضفدعة من الخلف وفوق
-2. **Top-Down**: نظرة عشائية من فوق
-3. **Free**: تحريك حر مع Mouse + IJKL
+1. **Follow**: Camera tracks the frog from behind and above
+2. **Top-Down**: Top-down overhead view
+3. **Free**: Free movement with Mouse + IJKL
 
 ---
 
-## 📦 المكتبات المستخدمة
+## 📦 Libraries Used
 
-- `OpenGL (GL)` - الرسم ثلاثي الأبعاد
-- `GLU` - gluPerspective, gluLookAt, gluQuadric
-- `GLUT / freeglut` - نافذة، input، main loop
+- `OpenGL (GL)` — 3D rendering
+- `GLU` — gluPerspective, gluLookAt, gluQuadric
+- `GLUT / freeglut` — window, input, main loop
 
-**لا يوجد أي مكتبة خارجية أخرى!**
+**No other external libraries required!**
 
 ---
 
-## 🎨 لقطة الشاشة (وصف)
+## 🎨 Screenshot (Description)
 
 ```
 ┌─────────────────────────────────────┐
