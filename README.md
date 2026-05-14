@@ -1,4 +1,4 @@
-# 🐸 FROG FRENZY 3D
+# 🐸 FROG FRENZY
 ## OpenGL C++ Game Project
 
 ---
