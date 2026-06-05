@@ -160,16 +160,16 @@ g++ main.cpp -o FrogFrenzy.exe -lopengl32 -lglu32 -lfreeglut -std=c++11
 ## 📸 Screenshots
 
 ### Main Gameplay
-![Gameplay](screenshots/MainGame.png)
+![Gameplay](Screenshots/MainGame.png)
 
 ### Free Camera View
-![Top Camera](screenshots/FreeView.png)
+![Top Camera](Screenshots/FreeView.png)
 
 ### Night Mode
-![Night Mode](screenshots/DarkMode.png)
+![Night Mode](Screenshots/DarkMode.png)
 
 ### Squash--lose
-![Free Camera](screenshots/Squash.png)
+![Free Camera](Screenshots/Squash.png)
 
 ```
 ┌─────────────────────────────────────┐
